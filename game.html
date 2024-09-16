@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Гра - Клікалка</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #000;
+            color: #00ff00;
+            margin-top: 50px;
+        }
+
+        #points {
+            font-size: 32px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #00ff00;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 20px;
+            background-color: #333;
+            color: #00ff00;
+            border: 2px solid #00ff00;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background-color: #00ff00;
+            color: #000;
+        }
+
+        button:disabled {
+            background-color: #555;
+            color: #888;
+            border-color: #555;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div id="points">Поінти: 0</div>
+    <button id="click-btn">Клікати!</button>
+    <div id="upgrade">
+        <button id="upgrade-btn">Прокачати клік (100 поінтів)</button>
+    </div>
+    <div id="boost">
+        <button id="boost-btn">Буст (Безкоштовно)</button>
+    </div>
+    <button id="logout-btn">Вийти</button>
+
+    <!-- Підключення JavaScript -->
+    <script src="script.js"></script>
+    <script>
+        // Перевірка, чи користувач авторизований
+        const activeUser = localStorage.getItem('activeUser');
+        if (!activeUser) {
+            window.location.href = 'login.html'; // Якщо немає авторизації, перенаправляємо на сторінку логіну
+        }
+    </script>
+</body>
+</html>

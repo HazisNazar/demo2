@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизація</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #000;
+            color: #00ff00;
+            margin-top: 50px;
+        }
+
+        input {
+            padding: 10px;
+            margin: 10px;
+            font-size: 18px;
+            border: 2px solid #00ff00;
+            border-radius: 5px;
+            background-color: #333;
+            color: #00ff00;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #333;
+            color: #00ff00;
+            border: 2px solid #00ff00;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #00ff00;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <h2>Авторизація/Реєстрація</h2>
+    <input type="text" id="username" placeholder="Нікнейм" required><br>
+    <input type="password" id="password" placeholder="Пароль" required><br>
+    <button id="login-btn">Увійти</button>
+    <button id="register-btn">Зареєструватися</button>
+
+    <script>
+        const loginButton = document.getElementById('login-btn');
+        const registerButton = document.getElementById('register-btn');
+
+        // Функція для авторизації
+        loginButton.addEventListener('click', () => {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const storedUser = JSON.parse(localStorage.getItem(username));
+            if (storedUser && storedUser.password === password) {
+                localStorage.setItem('activeUser', username); // Зберігаємо активного користувача
+                window.location.href = 'game.html'; // Перенаправляємо на сторінку гри
+            } else {
+                alert('Неправильний нікнейм або пароль.');
+            }
+        });
+
+        // Функція для реєстрації
+        registerButton.addEventListener('click', () => {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (localStorage.getItem(username)) {
+                alert('Користувач з таким нікнеймом вже існує.');
+            } else {
+                localStorage.setItem(username, JSON.stringify({ password }));
+                localStorage.setItem('activeUser', username); // Зберігаємо активного користувача
+                window.location.href = 'game.html'; // Перенаправляємо на сторінку гри
+            }
+        });
+    </script>
+</body>
+</html>
